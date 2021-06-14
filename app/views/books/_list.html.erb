@@ -1,0 +1,23 @@
+<div class="info">
+  <h2>User info</h2>
+  <% user.each do |user_info| %>
+  <div>
+    
+  </div>
+
+  
+</div>
+
+<!--user info の edit　へのリンク-->
+
+
+<div class="new">
+  <h3>New Book(新規投稿)</h3>
+  <%= form_with model:book local:tuue |Book| %>
+    <p>Title</p>
+    <%= f.feild :title %>
+    <p>Opinion</p>
+    <%= f.feild :opinion %>
+    <%= f.submit 'Create Book' %>
+  <% end %>
+</div>
