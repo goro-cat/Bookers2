@@ -1,0 +1,21 @@
+<h1>Users</h1>
+<p>image/name　参加者一覧</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>image</th>
+      <th>name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |book|%>
+    <tr>
+      <td><%= book.profile_image %></td>
+      <td><%= book.name %></td>
+      <td><%= link_to 'Show', user_path(book.id) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -1,9 +1,36 @@
 <h1>一覧画面</h1>
+<p>Books title/opinion　image画像込みで一覧表示</p>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <h3>New Book(新規投稿)</h3>
+      <%= form_with model:@book_new, local:true do |f| %>
+        <p>Title</p>
+        <%= f.text_field :title %>
+        <p>Opinion</p>
+        <%= f.text_field :opinion %>
+        <span>
+        <%= f.submit 'Create Book' %>
+        </span>
+      <% end %>
+    </div>
+    <div class="col-lg-8">
+      <h3>Users</h3>
+      <table>
+        <thead>
 
-<div class="left">
-  <%= render 'books#list', book: @book %>
-</div>
+          <th>Title</th>
+          <th>opinion</th>
+        </thead>
+        <tbody>
+        <% @books.each do |books_index| %>
 
-<div class="main">
-  
+          <td><%= books_index.title %></td>
+          <td><%= books_index.opinion %></td>
+        <% end %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
 </div>

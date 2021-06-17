@@ -1,23 +1,41 @@
-<div class="info">
-  <h2>User info</h2>
-  <% user.each do |user_info| %>
-  <div>
-    
+<div class="left-side">
+  <div class="User_info">
+    <h3>User info</h3>
+    <% @user.profile_image_id %>
+    <p>name</p>
+    <% @user.name %>
+    <p>introduction</p>
+    <% @user.introduction %>
   </div>
-
-  
+  <div class="setting">
+    <%= link_to edit_user_path, class: "btn btn-danfer", method: :get do%>
+      <i class="fas fa-user-cog"></i>
+    <% end %>
+  <div class="new">
+    <h3>New Book(新規投稿)</h3>
+    <%= form_with model:@book_new, local:true do |f| %>
+      <p>Title</p>
+      <%= f.text_field :title %>
+      <p>Opinion</p>
+      <%= f.text_field :opinion %>
+      <span>
+      <%= f.submit 'Create Book' %>
+      </span>
+    <% end %>
+  </div>
 </div>
 
-<!--user info の edit　へのリンク-->
+<!--新規投稿データ-->
+<div class="left">
+  <div class="profile-container">
 
-
-<div class="new">
-  <h3>New Book(新規投稿)</h3>
-  <%= form_with model:book local:tuue |Book| %>
-    <p>Title</p>
-    <%= f.feild :title %>
-    <p>Opinion</p>
-    <%= f.feild :opinion %>
-    <%= f.submit 'Create Book' %>
+  </div>
+  <div class="new-book">
+  <% if @book.errors.any? %>
+    <%= @book.errors.count %>件のエラーが発生しました
+    <% @book.errors.full_messages.each do |message| %>
+      <%= message %>
+    <% end %>
   <% end %>
+  </div>
 </div>
