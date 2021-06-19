@@ -1,45 +1,26 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-4">
-      <h3>User info</h3>
-      <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
-      <p>name</p>
-      <%= @user.name %>
-      <p>introduction</p>
-      <%= @user.introduction %>
+      <%= render 'users/user', user: @user, book_new: @book_new %>
       
-      <%= link_to edit_user_path, class: "btn btn-danfer", method: :get do%>
-      <i class="fas fa-user-cog"></i>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <table>
+      <thead>
+        <tr>
+        <th></th>
+        <th>Title</th>
+        <th colspan="3">opinion</th>
+        </tr>
+     </thead>
+      <tbody>
+      <% @mybook.each do |mybook| %>
+        <td><%= mybook.user_id %></td>
+        <td><%= mybook.title %></td>
+        <td><%= mybook.opinion %></td>
       <% end %>
-      
-      <div class="new">
-        <h3>New Book(新規投稿)</h3>
-        <%= form_with model:@book_new, local:true do |f| %>
-          <p>Title</p>
-          <%= f.text_field :title %>
-          <p>Opinion</p>
-          <%= f.text_field :opinion %>
-          <span>
-          <%= f.submit 'Create Book' %>
-          </span>
-        <% end %>
-      </div>
-    </div>
-    <div class="col-lg-8">
-      <table>
-        <thead>
-          <th></th>
-          <th>Title</th>
-          <th>opinion</th>
-        </thead>
-        <tbody>
-        <% @mybook.each do |mybook|%>
-          <td><%= my.book.user_id %></td>
-          <td><%= mybook.title %></td>
-          <td><%= mybook.opinion %></td>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
+      </tbody>
+    </table>
   </div>
 </div>

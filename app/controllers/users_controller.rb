@@ -1,22 +1,28 @@
 class UsersController < ApplicationController
   
   def index
+    @user = User.find(current_user.id)
+    @book_new = Book.new
     @users = User.all#Userモデルの全部を表示
     
   end
   
   
   def show
-    @user = User.find(current_user.id)
+    @user = current_user
     @book_new = Book.new
     @mybook = Book.where(user_id: params[:id])
     
   end
   
   def create
-    book_new = Book.new(book_params)
-    book_new.save
-    redirect_to users_path
+    @user = current_user
+    @book_new = Book.new(book_params)
+    if @book_new.save
+      redirect_to users_path
+    else
+      render :show
+    end
   end
 
   def edit
