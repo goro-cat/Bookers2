@@ -4,6 +4,7 @@ class BooksController < ApplicationController
     @user = current_user
     @book_new = Book.new#Bookモデルに新しいものを作成。箱の段階
     @books = Book.all
+
   end
 
   def create
@@ -11,9 +12,9 @@ class BooksController < ApplicationController
     @books = Book.all
     @book_new = Book.new(book_params)
     @book_new.user_id = current_user.id
-    
+
     if @book_new.save
-      redirect_to book_path(@book_new.id)
+      redirect_to book_path(@book_new.id), notice: "You have created book successfully."
     else
       render :index
     end
@@ -22,28 +23,37 @@ class BooksController < ApplicationController
   def show
     @user = current_user
     @book_new = Book.new
-    @book_show = Book.find(user_id: params[:id])
+
+    @book = Book.find(params[:id])
+    @users = @book.user
   end
-  
+
   def edit
     @book = Book.find(params[:id])
+  end
+
+  def destroy
+    book = Book.find(params[:id])
+    book.destroy
+    redirect_to books_path
   end
 
   def update
     book = Book.find(params[:id])
     book.update(book_params)
-    redirect_to book_path(current_user.id)
+    redirect_to book_path(book), notice: "You have updated book successfully."
   end
 
-  def delete
-    book = Book.find(params[:id])
-    book.destroy
-    redirect_to books_path
-  end
+
 
   private
 
   def book_params
     params.require(:book).permit(:title, :opinion, :user_id)
   end
+
+  def user_params
+    params.require(:user).permit(:name, :profile_image, :introduction)
+  end
+
 end

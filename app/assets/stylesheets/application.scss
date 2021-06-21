@@ -16,15 +16,13 @@
 @import "bootstrap";
 @import "font-awesome-sprockets";
 @import 'font-awesome';
-a{
+.nav-item{
   color:white;
+  margin:5px;
 }
 
 .tag{
   color:black;
-}
-.nav-item{
-  margin:5px;
 }
 
 .main{

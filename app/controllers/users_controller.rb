@@ -4,7 +4,6 @@ class UsersController < ApplicationController
     @user = User.find(current_user.id)
     @book_new = Book.new
     @users = User.all#Userモデルの全部を表示
-    
   end
   
   
@@ -12,7 +11,6 @@ class UsersController < ApplicationController
     @user = current_user
     @book_new = Book.new
     @mybook = Book.where(user_id: params[:id])
-    
   end
   
   def create
@@ -32,7 +30,7 @@ class UsersController < ApplicationController
   def update
     user = User.find(params[:id])
     user.update (user_params)
-    redirect_to user_path
+    redirect_to user_path, notice: "You have updated user successfully."
   end
 
   private
