@@ -11,59 +11,31 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <h3>User info</h3>
-      <%= attachment_image_tag @users, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
-      <p>name</p>
-      <%= @users.name %>
-      <p>introduction</p>
-      <%= @users.introduction %>
+      <%= render 'users/user', user: @users, book_new: @book_new %>
+    </div>
 
-      <%= link_to edit_user_path(@users.id), class: "btn btn-danfer", method: :get do %>
-      <i class="fas fa-user-cog"></i>
-      <% end %>
-
-      <div class="new">
-        <h3>New book</h3>
-        <% if @book_new.errors.any? %>
-          <%= @book_new.errors.count %>errors prohibited this obj from being saved:
-          <% @book_new.errors.full_messages.each do |message| %>
-            <%= message %>
-          <% end %>
-        <% end %>
-        <%= form_with model: @book_new, local:true do |f| %>
-
-          <p>Title</p>
-          <%= f.text_field :title %>
-          <p>Opinion</p>
-          <%= f.text_area :body %>
-          <span>
-          <%= f.submit 'Create Book' %>
-          </span>
-        <% end %>
+    <div class="col-md-8 offset-md-1">
+      <h3>Book detail</h3>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>
+               <%= link_to user_path(@users) do %><!--ユーザ一覧にパス-->
+               <%= attachment_image_tag @users, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %>
+               <%= @users.name %>
+                    <% end %>
+            </td>
+            <td><%= link_to book_path do %><!--詳細画面にパス-->
+                  <%= @book.title %>
+                  <% end %></td>
+            <td><%= @book.body %></td><!--opinionから変更-->
+            <% if @book.user == current_user %>
+            <td><%= link_to "Edit", edit_book_path, class: "btn btn-success btn-xs" %></td>
+            <td><%= link_to "Destroy", book_path(@book), method: :delete, data: { confirm: '削除しますか？'}, class: "btn btn-danger btn-xs" %></td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-
-  <div class="col-md-8 offset-md-1">
-    <h3>Book detail</h3>
-    <table class="table">
-      <tbody>
-        <tr>
-          <td>
-            <div><%= link_to user_path(@users) do %><!--ユーザ一覧にパス-->
-            <div><%= attachment_image_tag @users, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %></div>
-            <div> <%= @users.name %></div>
-                  <% end %></td>
-          <td><%= link_to book_path do %><!--詳細画面にパス-->
-                  <%= @book.title %>
-                <% end %></td>
-          <td><%= @book.body %></td><!--opinionから変更-->
-          <% if @book.user == current_user %>
-          <td><%= link_to "Edit", edit_book_path %></td>
-          <td><%= link_to "Destroy", book_path(@book), method: :delete, data: { confirm: '削除しますか？'} %></td>
-          <% end %>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
 </div>

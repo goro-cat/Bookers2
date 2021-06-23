@@ -1,11 +1,11 @@
       <h3>User info</h3>
-      <%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
-      <p>name</p>
-      <%= user.name %>
-      <p>introduction</p>
-      <%= user.introduction %>
+        <%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+        <p>name</p>
+        <%= user.name %>
+        <p>introduction</p>
+        <%= user.introduction %>
 
-      <%= link_to edit_user_path(user.id), class: "btn btn-lg btn-block", method: :get do %>
+      <%= link_to edit_user_path(user.id), class: "btn btn-outline-secondary btn-block", method: :get do %>
       <i class="fas fa-user-cog"></i>
       <% end %>
 
@@ -24,6 +24,7 @@
           <p>Opinion</p>
           <%= f.text_area :body %>
           <span>
-            <%= f.submit 'Create Book' %>
+            <%= f.submit 'Create Book', class: "btn btn-success btn-sm" %>
           </span>
         <% end %>
+      </div>
