@@ -19,7 +19,9 @@
       <tbody>
       <% @books.each do |books_index| %>
         <tr>
-          <td><%= attachment_image_tag books_index.user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %></td>
+          <td><%= link_to user_path(books_index.user) do %>
+              <%= attachment_image_tag books_index.user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %>
+              <% end %></td>
             <!--books_index　モデル名、：カラム名、サイズ等々-->
           <td><%= link_to book_path(books_index) do %>
               <%= books_index.title %>

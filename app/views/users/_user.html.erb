@@ -5,7 +5,7 @@
       <p>introduction</p>
       <%= user.introduction %>
 
-      <%= link_to edit_user_path(user.id), class: "btn btn-danfer", method: :get do %>
+      <%= link_to edit_user_path(user.id), class: "btn btn-lg btn-block", method: :get do %>
       <i class="fas fa-user-cog"></i>
       <% end %>
 
@@ -24,6 +24,6 @@
           <p>Opinion</p>
           <%= f.text_area :body %>
           <span>
-          <%= f.submit 'Create Book' %>
+            <%= f.submit 'Create Book' %>
           </span>
         <% end %>

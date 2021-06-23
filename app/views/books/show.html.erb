@@ -44,21 +44,21 @@
   </div>
 
   <div class="col-md-8 offset-md-1">
-  　<h3>Book detail</h3>
-  　<table class="table">
+    <h3>Book detail</h3>
+    <table class="table">
       <tbody>
         <tr>
           <td>
-            <div><%= attachment_image_tag @users, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %></div>
             <div><%= link_to user_path(@users) do %><!--ユーザ一覧にパス-->
-                  <%= @users.name %>
-                  <% end %></div></td>
+            <div><%= attachment_image_tag @users, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %></div>
+            <div> <%= @users.name %></div>
+                  <% end %></td>
           <td><%= link_to book_path do %><!--詳細画面にパス-->
                   <%= @book.title %>
                 <% end %></td>
           <td><%= @book.body %></td><!--opinionから変更-->
           <% if @book.user == current_user %>
-          <td><%= link_to "Edit", edit_book_path(@book) %></td>
+          <td><%= link_to "Edit", edit_book_path %></td>
           <td><%= link_to "Destroy", book_path(@book), method: :delete, data: { confirm: '削除しますか？'} %></td>
           <% end %>
         </tr>

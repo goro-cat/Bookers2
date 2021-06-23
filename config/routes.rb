@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   root 'homes#top'
   # get 'homes#index'
-  get 'homes/about' => 'homes#index'
+  get 'home/about' => 'homes#index'
   #  path 'top' => 'books#index'
   get '/users/sign_in' => 'users/sign_up'
   resources :users

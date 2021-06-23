@@ -1,5 +1,7 @@
 class BooksController < ApplicationController
 
+  before_action :authenticate_user!,except: [:log_i]
+
   def index
     @user = current_user
     @book_new = Book.new#Bookモデルに新しいものを作成。箱の段階
@@ -29,6 +31,9 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
+    if @book.user != current_user
+      redirect_to books_path
+    end
   end
 
   def destroy
@@ -41,8 +46,8 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
 
     if @book.update(book_params)
-　    redirect_to book_path(@book.id)
-　    flash[:notice] = "You have updated book successfully."
+      redirect_to book_path(@book.id)
+      flash[:notice] = "You have updated book successfully."
     else
       render :edit
     end
