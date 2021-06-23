@@ -1,10 +1,17 @@
-<h3>投稿内容の編集ページ</h3>
+<h3>Editing Book</h3>
+
+ <% if @book.errors.any? %>
+    <%= @book.errors.count %>errors prohibited this user from being saved:
+    <% @book.errors.full_messages.each do |message| %>
+      <%= message %>
+    <% end %>
+  <% end %>
 
   <%= form_with model:@book, local:true do |f| %>
   <p>Title</p>
     <%= f.text_field :title %>
   <p>Opinion</p>
-    <%= f.text_field :opinion %>
+    <%= f.text_area :body %><!--opinionからの変更-->
   <span>
     <%= f.submit 'Update Book' %>
   </span>

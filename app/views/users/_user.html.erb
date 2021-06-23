@@ -10,7 +10,7 @@
       <% end %>
 
       <div class="new">
-        <h3>New Book(新規投稿)</h3>
+        <h3>New book</h3>
         <% if book_new.errors.any? %>
           <%= book_new.errors.count %>errors prohibited this obj from being saved:
           <% book_new.errors.full_messages.each do |message| %>
@@ -18,11 +18,11 @@
           <% end %>
         <% end %>
         <%= form_with model:book_new, local:true do |f| %>
-        　
+
           <p>Title</p>
           <%= f.text_field :title %>
           <p>Opinion</p>
-          <%= f.text_field :opinion %>
+          <%= f.text_area :body %>
           <span>
           <%= f.submit 'Create Book' %>
           </span>

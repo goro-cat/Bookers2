@@ -1,6 +1,13 @@
-<h1>User の　編集画面</h1>
+<h1>User info</h1>
 <div class="main">
-  <h2>User info</h2>
+  <% if @user.errors.any? %>
+    <%= @user.errors.count %>error prohibited this obj from being saved:
+    <% @user.errors.full_messages.each do |message| %>
+      <%= message %>
+    <% end %>
+  <% end %>
+
+
   <%= form_with model:@user, local:true do |f| %>
   <div class="main-item">
     <label for="inputName">Name</label>

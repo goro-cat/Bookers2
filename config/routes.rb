@@ -4,12 +4,13 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root 'homes#top'
- # get 'homes#index'
-  get 'about' => 'homes#index'
-#  path 'top' => 'books#index'
+  # get 'homes#index'
+  get 'homes/about' => 'homes#index'
+  #  path 'top' => 'books#index'
+  get '/users/sign_in' => 'users/sign_up'
   resources :users
   resources :books
-  post 'users' => 'users#create'
+  post '/users' => 'users#create'
   #post 'books' => 'books#create'
-  post 'users/:id' => 'books#show'
+  post '/users/:id' => 'books#show'
   end

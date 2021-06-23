@@ -21,9 +21,8 @@ class BooksController < ApplicationController
   end
 
   def show
-    @user = current_user
+    #@user = current_user
     @book_new = Book.new
-
     @book = Book.find(params[:id])
     @users = @book.user
   end
@@ -39,9 +38,14 @@ class BooksController < ApplicationController
   end
 
   def update
-    book = Book.find(params[:id])
-    book.update(book_params)
-    redirect_to book_path(book), notice: "You have updated book successfully."
+    @book = Book.find(params[:id])
+
+    if @book.update(book_params)
+　    redirect_to book_path(@book.id)
+　    flash[:notice] = "You have updated book successfully."
+    else
+      render :edit
+    end
   end
 
 
@@ -49,7 +53,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :opinion, :user_id)
+    params.require(:book).permit(:title, :body, :user_id)#opinionから
   end
 
   def user_params

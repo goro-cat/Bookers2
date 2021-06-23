@@ -1,13 +1,49 @@
 <%= notice %>
-<h1>詳細画面</h1>
-<p>Book detail 投稿者/title/opinion　表示</p>
+
+ <% if @book_new.errors.any? %>
+    <%= @book_new.errors.count %>errors prohibited this obj from being saved:
+    <% @book_new.errors.full_messages.each do |message| %>
+      <%= message %>
+    <% end %>
+  <% end %>
+
+<!--本の詳細画面-->
 <div class="container">
   <div class="row">
-    <div class="col-lg-4">
-      <%= render 'users/user', user: @user, book_new: @book_new %>
+    <div class="col-md-3">
+      <h3>User info</h3>
+      <%= attachment_image_tag @users, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+      <p>name</p>
+      <%= @users.name %>
+      <p>introduction</p>
+      <%= @users.introduction %>
+
+      <%= link_to edit_user_path(@users.id), class: "btn btn-danfer", method: :get do %>
+      <i class="fas fa-user-cog"></i>
+      <% end %>
+
+      <div class="new">
+        <h3>New book</h3>
+        <% if @book_new.errors.any? %>
+          <%= @book_new.errors.count %>errors prohibited this obj from being saved:
+          <% @book_new.errors.full_messages.each do |message| %>
+            <%= message %>
+          <% end %>
+        <% end %>
+        <%= form_with model: @book_new, local:true do |f| %>
+
+          <p>Title</p>
+          <%= f.text_field :title %>
+          <p>Opinion</p>
+          <%= f.text_area :body %>
+          <span>
+          <%= f.submit 'Create Book' %>
+          </span>
+        <% end %>
     </div>
   </div>
-  <div class="col-lg-8">
+
+  <div class="col-md-8 offset-md-1">
   　<h3>Book detail</h3>
   　<table class="table">
       <tbody>
@@ -20,13 +56,14 @@
           <td><%= link_to book_path do %><!--詳細画面にパス-->
                   <%= @book.title %>
                 <% end %></td>
-          <td><%= @book.opinion %></td>
+          <td><%= @book.body %></td><!--opinionから変更-->
           <% if @book.user == current_user %>
           <td><%= link_to "Edit", edit_book_path(@book) %></td>
-          <td><%= link_to "Destory", book_path(@book), method: :delete %></td>
+          <td><%= link_to "Destroy", book_path(@book), method: :delete, data: { confirm: '削除しますか？'} %></td>
           <% end %>
         </tr>
       </tbody>
     </table>
   </div>
+</div>
 </div>

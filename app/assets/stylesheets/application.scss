@@ -17,15 +17,18 @@
 @import "font-awesome-sprockets";
 @import 'font-awesome';
 .nav-item{
-  color:white;
-  margin:5px;
+  color: white;
+  margin: 5px;
 }
 
 .tag{
-  color:black;
+  color: black;
 }
 
 .main{
-  margin:50;
+  margin: 50;
 }
 
+.row{
+  width: 100%;
+}

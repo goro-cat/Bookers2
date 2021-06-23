@@ -1,11 +1,41 @@
 <%= notice %>
 <div class="container">
   <div class="row">
-    <div class="col-lg-4">
-      <%= render 'users/user', user: @user, book_new: @book_new %>
+    <div class="col-md-3">
+
+      <h3>User info</h3>
+      <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+      <p>name</p>
+      <%= @user.name %>
+      <p>introduction</p>
+      <%= @user.introduction %>
+
+      <%= link_to edit_user_path(@user.id), class: "btn btn-danfer", method: :get do %>
+      <i class="fas fa-user-cog"></i>
+      <% end %>
+
+      <div class="new">
+        <h3>New book</h3>
+        <% if @book_new.errors.any? %>
+          <%= @book_new.errors.count %>errors prohibited this obj from being saved:
+          <% @book_new.errors.full_messages.each do |message| %>
+            <%= message %>
+          <% end %>
+        <% end %>
+        <%= form_with model: @book_new, local:true do |f| %>
+
+          <p>Title</p>
+          <%= f.text_field :title %>
+          <p>Opinion</p>
+          <%= f.text_area :body %>
+          <span>
+          <%= f.submit 'Create Book' %>
+          </span>
+        <% end %>
+
     </div>
   </div>
-  <div class="col-lg-8">
+  <div class="col-md-8 offset-md-1">
     <h3>Books</h3>
     <table class="table">
       <thead>
@@ -24,10 +54,11 @@
             <td><%= link_to book_path(mybook.id) do%>
                 <%= mybook.title %>
                 <% end %></td>
-            <td><%= mybook.opinion %></td>
+            <td><%= mybook.body %></td><!--opinionからの-->
           </tr>
           <% end %>
         </tbody>
       </table>
     </div>
+  </div>
   </div>

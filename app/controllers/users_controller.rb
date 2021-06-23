@@ -5,14 +5,15 @@ class UsersController < ApplicationController
     @book_new = Book.new
     @users = User.all#Userモデルの全部を表示
   end
-  
-  
+
+
   def show
-    @user = current_user
     @book_new = Book.new
-    @mybook = Book.where(user_id: params[:id])
+    #@mybook = Book.where(user_id: params[:id])
+    @user = User.find(params[:id])
+    @mybook = @user.books
   end
-  
+
   def create
     @user = current_user
     @book_new = Book.new(book_params)
@@ -26,19 +27,24 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
   end
-  
+
   def update
-    user = User.find(params[:id])
-    user.update (user_params)
-    redirect_to user_path, notice: "You have updated user successfully."
+    @user = User.find(params[:id])
+
+    if @user.update (user_params)
+      redirect_to user_path(@user.id)
+      flash[:notice] = "You have updated user successfully."
+    else
+      render :edit
+    end
   end
 
   private
   def user_params
     params.require(:user).permit(:name, :profile_image, :introduction)
   end
-  
+
   def book_params
-    params.require(:book).permit(:title, :opinion, :user_id)
+    params.require(:book).permit(:title, :body, :user_id)
   end
 end

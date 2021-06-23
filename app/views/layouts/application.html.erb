@@ -15,7 +15,7 @@
     <header class="bg-dark text-white pt-5 pb-4 shadow-sm">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-          <p>Bookers</p>
+          <p><%= link_to "Bookers", root_path %></p><!--リンクを-->
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -38,14 +38,14 @@
               <li class="nav-item"><%= link_to root_path do %>
                 <i class="fas fa-home">Home</i>
               <% end %></li>
-              <li class="nav-item"><%= link_to about_path do %>
+              <li class="nav-item"><%= link_to homes_about_path do %>
                 <i class="fas fa-link">About</i>
               <% end %></li>
               <li class="nav-item"><%= link_to new_user_registration_path do %>
                <i class="fas fa-user-plus">sign up</i>
               <% end %></li>
               <li class="nav-item"><%= link_to new_user_session_path do %>
-                <i class="fas fa-sign-in-alt">login</i>
+                <i class="fas fa-sign-in-alt">login</i><!--テストで変更login-->
               <% end %></li>
             <% end %>
             </ul>
